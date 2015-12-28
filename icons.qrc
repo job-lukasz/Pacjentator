@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/zoomout.svg</file>
+        <file>icons/zoomin.svg</file>
+        <file>icons/addMedicine.svg</file>
+    </qresource>
+</RCC>
