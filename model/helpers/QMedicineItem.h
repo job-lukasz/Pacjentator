@@ -6,8 +6,8 @@
 class QMedicineItem : public QStandardItem
 {
 public:
-    QMedicineItem(PacjentMedicine medicine);
-    PacjentMedicine medicine;
+    QMedicineItem(PacjentMedicine* medicine);
+    PacjentMedicine* medicine;
 };
 
 #endif // QMEDICINEITEM_H

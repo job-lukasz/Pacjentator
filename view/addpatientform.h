@@ -16,11 +16,11 @@ class AddPatientForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit AddPatientForm(QWidget *parent = 0);
+    explicit AddPatientForm(PacjentMedicine* form,QWidget *parent = 0);
     ~AddPatientForm();
 
 signals:
-    void save(PacjentMedicine);
+    void save(PacjentMedicine*);
 
 private slots:
     void on_cancel_clicked();
@@ -28,7 +28,7 @@ private slots:
     void setColor(QColor color);
 
 private:
-    PacjentMedicine saveValue;
+    PacjentMedicine* saveValue;
 
     Ui::addPatientForm *ui;
     ColorPickerWidget* colorPicker;

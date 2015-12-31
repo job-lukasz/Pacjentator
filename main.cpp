@@ -1,4 +1,3 @@
-#include "view/pacjentator.h"
 #include <QApplication>
 #include "controller/pacjentatorcontroller.h"
 

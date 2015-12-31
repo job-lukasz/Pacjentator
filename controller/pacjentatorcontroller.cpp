@@ -2,20 +2,29 @@
 
 PacjentatorController::PacjentatorController(QObject *parent)
 {
+//    std::list<Repositories*> reposList = {
+      PacjentMedicineRepository::getRepository();
+ //     };
+//      DatabaseModel::initTables(reposList);
+
+//    for(std::map<std::string,CellParameters>::iterator it = DatabaseModel::DatabaseMap.begin(); it != DatabaseModel::DatabaseMap.end(); ++it) {
+//        qDebug()<< it->first.c_str() << " "<<it->second.table.c_str() <<" "<< it->second.name.c_str() ;
+//    }
+
     model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
     pacjentator = new Pacjentator(model,this);
 }
 
 void PacjentatorController::openAddMedicineForm(){
-    addMedicineForm = QSharedPointer<AddPatientForm>(new AddPatientForm());
+    addMedicineForm = QSharedPointer<AddPatientForm>(new AddPatientForm(new PacjentMedicine));
     addMedicineForm->show();
     addMedicineForm->setWindowModality(Qt::WindowModal);
-    connect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine)),this, SLOT(addMedicine(PacjentMedicine)));
+    connect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(addMedicine(PacjentMedicine*)));
 }
 
-void PacjentatorController::addMedicine(PacjentMedicine value){
-    disconnect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine)),this, SLOT(addMedicine(PacjentMedicine)));
-    if(value.name!=""){
+void PacjentatorController::addMedicine(PacjentMedicine *value){
+    disconnect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(addMedicine(PacjentMedicine*)));
+    if(value->name->getValue()!=""){
         model->addMedicine(value);
         model->fillVerticalHeaders(pacjentator->getCurrentColumn());
         pacjentator->tableDecorer->spanCells(model->rowCount()-1);

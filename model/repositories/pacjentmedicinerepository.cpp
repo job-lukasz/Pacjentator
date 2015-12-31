@@ -1,8 +1,15 @@
 #include "pacjentmedicinerepository.h"
+#include <QDebug>
 
-PacjentMedicine PacjentMedicineRepository::getPacjentMedicine(int id){
-
+void PacjentMedicineRepository::initTableFields()
+{
+    qDebug()<<"Initialize PacejntMedicine repository";
+    //currentValue.init();
 }
+
+//PacjentMedicine PacjentMedicineRepository::getPacjentMedicine(int id){
+
+//}
 
 
 

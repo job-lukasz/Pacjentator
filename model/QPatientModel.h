@@ -22,7 +22,7 @@ public:
     void generateHeader();
     QModelIndex getModelIndex(QDate date);
     void fillVerticalHeaders(int value);
-    void addMedicine(PacjentMedicine medicine);
+    void addMedicine(PacjentMedicine* medicine);
 
 private:
     QDate startDate;

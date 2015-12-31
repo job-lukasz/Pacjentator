@@ -7,8 +7,8 @@ class RowColorer
 {
 public:
     RowColorer();
-    QGradient getGradient(PacjentMedicine medicine);
-    QBrush getBrush(PacjentMedicine medicine);
+    QGradient getGradient(const PacjentMedicine* medicine);
+    QBrush getBrush(const PacjentMedicine *medicine);
 };
 
 #endif // ROWCOLORER_H

@@ -4,25 +4,25 @@ RowColorer::RowColorer(){
 
 }
 
-QGradient RowColorer::getGradient(PacjentMedicine medicine)
+QGradient RowColorer::getGradient(const PacjentMedicine *medicine)
 {
     QLinearGradient grandient(25,25,100,100);
-    if(medicine.fromKnownDate!=PacjentMedicine::wellKnown){
+    if(medicine->fromKnownDate!=PacjentMedicine::wellKnown){
         grandient.setColorAt(0,Qt::white);
     }
 
-    grandient.setColorAt(0.5,medicine.color);
+    grandient.setColorAt(0.5,medicine->color);
 
-    if(medicine.toKnownDate!=PacjentMedicine::wellKnown){
+    if(medicine->toKnownDate!=PacjentMedicine::wellKnown){
         grandient.setColorAt(1,Qt::white);
     }
     return grandient;
 }
 
-QBrush RowColorer::getBrush(PacjentMedicine medicine)
+QBrush RowColorer::getBrush(const PacjentMedicine* medicine)
 {
-    if(medicine.fromKnownDate==PacjentMedicine::wellKnown && medicine.toKnownDate==PacjentMedicine::wellKnown){
-        return QBrush(medicine.color);
+    if(medicine->fromKnownDate==PacjentMedicine::wellKnown && medicine->toKnownDate==PacjentMedicine::wellKnown){
+        return QBrush(medicine->color);
     }
     else{
         return QBrush(getGradient(medicine));

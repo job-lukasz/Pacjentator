@@ -17,7 +17,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
     helpers/calendar.cpp \
     model/repositories/pacjentmedicinerepository.cpp \
-    model/repositories/repositories.cpp \
     view/colorTriangle/colorpickerwidget.cpp \
     view/colorTriangle/colorviewer.cpp \
     view/colorTriangle/qtcolortriangle.cpp \
@@ -33,11 +32,14 @@ SOURCES += main.cpp\
     DatabaseController/databaseconnector.cpp \
     DatabaseController/databaseresult.cpp \
     DatabaseController/databaserow.cpp \
-    DatabaseController/databasecell.cpp
+    DatabaseController/databasecell.cpp \
+    ORM/databasemodel.cpp \
+    ORM/cellparameters.cpp \
+    ORM/dbtable.cpp \
+    ORM/repositories.cpp
 
 HEADERS  += helpers/calendar.h \
     model/repositories/pacjentmedicinerepository.h \
-    model/repositories/repositories.h \
     view/colorTriangle/colorpickerwidget.h \
     view/colorTriangle/colorviewer.h \
     view/colorTriangle/qtcolortriangle.h \
@@ -53,7 +55,13 @@ HEADERS  += helpers/calendar.h \
     DatabaseController/databaseconnector.h \
     DatabaseController/databaseresult.h \
     DatabaseController/databaserow.h \
-    DatabaseController/databasecell.h
+    DatabaseController/databasecell.h \
+    ORM/dbcell.hpp \
+    ORM/databasemodel.h \
+    ORM/cellparameters.h \
+    ORM/dbinicjalizator.hpp \
+    ORM/dbtable.h \
+    ORM/repositories.h
 
 FORMS    += pacjentator.ui \
     addpatientform.ui

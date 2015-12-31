@@ -25,14 +25,14 @@ void PatientModel::generateHeader()
     }
 }
 
-void PatientModel::addMedicine(PacjentMedicine medicine){
+void PatientModel::addMedicine(PacjentMedicine* medicine){
     QMedicineItem* tmp = new QMedicineItem(medicine);
     tmp->setBackground(colorer->getBrush(medicine));
 
-    int startDateColumn = getColumnNumber(medicine.from);
-    int endDateColumn = getColumnNumber(medicine.to);
+    int startDateColumn = getColumnNumber(medicine->from->getValue());
+    int endDateColumn = getColumnNumber(medicine->to);
 
-    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine.dose,medicine.freguency));
+    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine->dose,medicine->freguency));
     int row = rowCount();
     setItem(row,0,new QStandardItem(QString("")));
     setItem(row,startDateColumn,tmp);

@@ -1,10 +1,22 @@
 #ifndef PACJENTATORCONTROLLER_H
 #define PACJENTATORCONTROLLER_H
 #include <QSharedPointer>
+#include <QDebug>
+#include <map>
+#include <string>
+
 #include "../model/helpers/QMedicineItem.h"
 #include "../view/addpatientform.h"
 #include "../model/QPatientModel.h"
 #include "../view/pacjentator.h"
+#include "ORM/databasemodel.h"
+#include "ORM/cellparameters.h"
+#include "ORM/dbinicjalizator.hpp"
+#include "ORM/dbtable.h"
+#include "ORM/repositories.h"
+
+#include "model/repositories/pacjentmedicinerepository.h"
+#include "DatabaseController/databaseconnector.h"
 
 class Pacjentator;
 
@@ -29,8 +41,7 @@ private:
     QSharedPointer<AddPatientForm> addMedicineForm;
 
 private slots:
-    void addMedicine(PacjentMedicine value);
-
+    void addMedicine(PacjentMedicine* value);
 };
 
 #endif // PACJENTATORCONTROLLER_H
