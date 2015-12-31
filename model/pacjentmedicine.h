@@ -7,7 +7,7 @@
 #include <ORM/dbtable.h>
 #include <string>
 
-class PacjentMedicine:public DBTable
+class PacjentMedicine
 {
 public:
     enum dateKnowlege{wellKnown=1, dayNotKnown=2, mounthNotKnow=3, onGoing=4};

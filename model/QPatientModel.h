@@ -6,7 +6,7 @@
 #include <QDate>
 #include <QStandardItem>
 #include "model/pacjentmedicine.h"
-#include "helpers/rowcolorer.h"
+#include "model/helpers/rowcolorer.h"
 #include "helpers/calendar.h"
 #include "model/helpers/QMedicineItem.h"
 

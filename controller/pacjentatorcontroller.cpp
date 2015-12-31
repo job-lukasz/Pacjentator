@@ -2,15 +2,12 @@
 
 PacjentatorController::PacjentatorController(QObject *parent)
 {
-//    std::list<Repositories*> reposList = {
-      PacjentMedicineRepository::getRepository();
- //     };
-//      DatabaseModel::initTables(reposList);
-
-//    for(std::map<std::string,CellParameters>::iterator it = DatabaseModel::DatabaseMap.begin(); it != DatabaseModel::DatabaseMap.end(); ++it) {
-//        qDebug()<< it->first.c_str() << " "<<it->second.table.c_str() <<" "<< it->second.name.c_str() ;
-//    }
-
+    std::list<DBRepositories*> repos = {
+        PacjentMedicineRepository::getRepository()
+    };
+    DBConfig* config = new DBConfig(repos);
+    DBModel* dbModel = new DBModel(config);
+    dbModel->init();
     model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
     pacjentator = new Pacjentator(model,this);
 }

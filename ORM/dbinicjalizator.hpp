@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 #include "cellparameters.h"
-#include "databasemodel.h"
+#include "dbmodel.h"
 
 template <int DBNumber>
 class DBInicjalizator{

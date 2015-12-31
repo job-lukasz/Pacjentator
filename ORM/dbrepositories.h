@@ -1,10 +1,11 @@
 #ifndef REPOSITORIES_H
 #define REPOSITORIES_H
 
-class Repositories
+class DBRepositories
 {
+protected:
+    DBRepositories();
 public:
-    Repositories();
     virtual void initTableFields() = 0;
 };
 

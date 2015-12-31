@@ -29,14 +29,15 @@ SOURCES += main.cpp\
     view/pacjentator.cpp \
     model/QPatientModel.cpp \
     model/helpers/QMedicineItem.cpp \
-    DatabaseController/databaseconnector.cpp \
-    DatabaseController/databaseresult.cpp \
-    DatabaseController/databaserow.cpp \
-    DatabaseController/databasecell.cpp \
-    ORM/databasemodel.cpp \
     ORM/cellparameters.cpp \
     ORM/dbtable.cpp \
-    ORM/repositories.cpp
+    ORM/dbrepositories.cpp \
+    ORM/dbconfig.cpp \
+    ORM/dbmodel.cpp \
+    ORM/DatabaseController/databasecell.cpp \
+    ORM/DatabaseController/databaseconnector.cpp \
+    ORM/DatabaseController/databaseresult.cpp \
+    ORM/DatabaseController/databaserow.cpp
 
 HEADERS  += helpers/calendar.h \
     model/repositories/pacjentmedicinerepository.h \
@@ -52,16 +53,17 @@ HEADERS  += helpers/calendar.h \
     view/pacjentator.h \
     model/QPatientModel.h \
     model/helpers/QMedicineItem.h \
-    DatabaseController/databaseconnector.h \
-    DatabaseController/databaseresult.h \
-    DatabaseController/databaserow.h \
-    DatabaseController/databasecell.h \
     ORM/dbcell.hpp \
-    ORM/databasemodel.h \
     ORM/cellparameters.h \
-    ORM/dbinicjalizator.hpp \
     ORM/dbtable.h \
-    ORM/repositories.h
+    ORM/dbrepositories.h \
+    ORM/dbconfig.h \
+    ORM/DatabaseController/databasecell.h \
+    ORM/DatabaseController/databaseconnector.h \
+    ORM/DatabaseController/databaseresult.h \
+    ORM/DatabaseController/databaserow.h \
+    ORM/dbmodel.h
+
 
 FORMS    += pacjentator.ui \
     addpatientform.ui

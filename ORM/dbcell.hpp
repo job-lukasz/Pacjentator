@@ -2,9 +2,10 @@
 #define DBCELL_H
 #include <string>
 #include <map>
-#include "databasemodel.h"
-#include "cellparameters.h"
 #include <QDebug>
+#include "dbmodel.h"
+#include "cellparameters.h"
+
 
 template <typename CellType>
 class DBCell
@@ -22,16 +23,16 @@ public:
     DBCell(const std::string &tableName,const std::string &columnName){
         CellParameters newParameters = {tableName,columnName};
         parameters=newParameters;
-        if(DatabaseModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DatabaseModel::DatabaseMap.end()){
-            DatabaseModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
+        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DBModel::DatabaseMap.end()){
+            DBModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
             qDebug()<<"Add: "<< parameters.table.c_str() << "/" << parameters.name.c_str() << "to DatabaseMap";
         }
     }
 
     DBCell(const CellParameters &cellParameters){
         parameters=cellParameters;
-        if(DatabaseModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DatabaseModel::DatabaseMap.end()){
-            DatabaseModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
+        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DBModel::DatabaseMap.end()){
+            DBModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
             qDebug()<<"Add:"<< parameters.table.c_str() << "/" << parameters.name.c_str() << "to DatabaseMap";
         }
     }
