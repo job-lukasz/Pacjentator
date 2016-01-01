@@ -1,6 +1,7 @@
 #include "pacjentmedicinerepository.h"
 #include <QDebug>
 PacjentMedicineRepository* PacjentMedicineRepository::singleton=0;
+
 PacjentMedicineRepository* PacjentMedicineRepository::getRepository()
 {
     if(!singleton){
@@ -11,7 +12,7 @@ PacjentMedicineRepository* PacjentMedicineRepository::getRepository()
 
 void PacjentMedicineRepository::initTableFields()
 {
-    qDebug()<<"Initialize PacejntMedicine repository";
+    qDebug()<<"Initialize all repositories";
     currentValue.init();
 }
 

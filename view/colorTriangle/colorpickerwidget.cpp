@@ -39,6 +39,9 @@ ColorPickerWidget::ColorPickerWidget(QWidget *parent)
 
 ColorPickerWidget::~ColorPickerWidget()
 {
+    if(colorTriangle) delete colorTriangle;
+    if(colorView) delete colorView;
+    if(layout) delete layout;
 }
 
 void ColorPickerWidget::setColor(const QColor &col)

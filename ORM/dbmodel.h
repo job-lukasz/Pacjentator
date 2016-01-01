@@ -4,15 +4,15 @@
 #include <map>
 #include <list>
 #include <QDebug>
-#include "cellparameters.h"
-#include "dbrepositories.h"
+#include "dbcellparameters.h"
+#include "idbrepositories.h"
 #include "dbconfig.h"
 
 class DBModel{
 public:
     DBModel(DBConfig* config);
     DBConfig* config;
-    static std::map<std::string,CellParameters> DatabaseMap;
+    static std::map<std::string,DBCellParameters> DatabaseMap;
     void init();
 
     virtual ~DBModel();

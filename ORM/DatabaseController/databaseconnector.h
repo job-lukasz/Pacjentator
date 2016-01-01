@@ -9,8 +9,6 @@
 #include <QSqlRecord>
 #include "databaseresult.h"
 
-#define DBPATH "./database.sqlite"
-
 class DatabaseConnector
 {
 private:
@@ -24,14 +22,14 @@ private:
 
 
 public: 
-    static void conntect();
+    static void conntect(const QString &dbPath);
     static void disconnect();
     static DatabaseConnector& getConnector(){
         static DatabaseConnector singleton;
         return singleton;
     }
     bool executeQuerry(QString query);
-    DatabaseResult* executeQueryGetResults(QString sqlQuery);
+    DatabaseResult executeQueryGetResults(QString sqlQuery);
 
 };
 #endif // DATABASECONNECTOR_H

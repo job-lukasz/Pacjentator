@@ -1,6 +1,8 @@
 #include "dbconfig.h"
 
-DBConfig::DBConfig(const std::list<DBRepositories *> &repositoryList){
+#define DBPATH "./database.sqlite"
+
+DBConfig::DBConfig(const std::list<IDBRepositories *> &repositoryList){
     repoList = repositoryList;
 }
 

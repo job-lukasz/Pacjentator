@@ -4,10 +4,10 @@
 #include <QDate>
 #include <QColor>
 #include <ORM/dbcell.hpp>
-#include <ORM/dbtable.h>
+#include <ORM/idbtable.h>
 #include <string>
 
-class PacjentMedicine
+class PacjentMedicine:public IDBTable
 {
 public:
     enum dateKnowlege{wellKnown=1, dayNotKnown=2, mounthNotKnow=3, onGoing=4};
@@ -15,13 +15,14 @@ public:
     PacjentMedicine(const PacjentMedicine &old);
     DBCell<QString>* name;
     DBCell<QDate>* from;
-    QDate to;
-    QColor color;
-    QString dose;
-    QString freguency;
-    dateKnowlege fromKnownDate = static_cast<dateKnowlege>(1);
-    dateKnowlege toKnownDate =  static_cast<dateKnowlege>(1);
+    DBCell<QDate>* to;
+    DBCell<QColor>* color;
+    DBCell<QString>* dose;
+    DBCell<QString>* freguency;
+    DBCell<dateKnowlege>* fromKnownDate;
+    DBCell<dateKnowlege>* toKnownDate;
     virtual void init();
+    virtual ~PacjentMedicine();
 };
 
 #endif // PACJENTMEDICINE_H

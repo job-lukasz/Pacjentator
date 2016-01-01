@@ -30,14 +30,14 @@ SOURCES += main.cpp\
     model/QPatientModel.cpp \
     model/helpers/QMedicineItem.cpp \
     ORM/cellparameters.cpp \
-    ORM/dbtable.cpp \
-    ORM/dbrepositories.cpp \
     ORM/dbconfig.cpp \
     ORM/dbmodel.cpp \
     ORM/DatabaseController/databasecell.cpp \
     ORM/DatabaseController/databaseconnector.cpp \
     ORM/DatabaseController/databaseresult.cpp \
-    ORM/DatabaseController/databaserow.cpp
+    ORM/DatabaseController/databaserow.cpp \
+    ORM/idbcell.cpp \
+    ORM/idbtable.cpp
 
 HEADERS  += helpers/calendar.h \
     model/repositories/pacjentmedicinerepository.h \
@@ -54,15 +54,16 @@ HEADERS  += helpers/calendar.h \
     model/QPatientModel.h \
     model/helpers/QMedicineItem.h \
     ORM/dbcell.hpp \
-    ORM/cellparameters.h \
-    ORM/dbtable.h \
-    ORM/dbrepositories.h \
     ORM/dbconfig.h \
     ORM/DatabaseController/databasecell.h \
     ORM/DatabaseController/databaseconnector.h \
     ORM/DatabaseController/databaseresult.h \
     ORM/DatabaseController/databaserow.h \
-    ORM/dbmodel.h
+    ORM/dbmodel.h \
+    ORM/idbrepositories.h \
+    ORM/idbtable.h \
+    ORM/dbcellparameters.h \
+    ORM/idbcell.h
 
 
 FORMS    += pacjentator.ui \

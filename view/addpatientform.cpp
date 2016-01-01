@@ -22,6 +22,7 @@ AddPatientForm::AddPatientForm(PacjentMedicine *form, QWidget *parent) :
 
 AddPatientForm::~AddPatientForm()
 {
+    if(colorPicker) delete colorPicker;
     delete ui;
 }
 
@@ -31,18 +32,18 @@ void AddPatientForm::on_cancel_clicked()
 }
 
 void AddPatientForm::setColor(QColor color){
-    saveValue->color=color;
+    saveValue->color->setValue(color);
 }
 
 void AddPatientForm::on_Save_clicked()
 {
     saveValue->from->setValue(ui->medicineFrom->date());
-    saveValue->to = ui->medicineTo->date();
+    saveValue->to->setValue(ui->medicineTo->date());
     saveValue->name->setValue(ui->medicineName->text());
-    saveValue->dose = ui->dose->text();
-    saveValue->freguency = ui->frequency->text();
-    saveValue->fromKnownDate =  static_cast<PacjentMedicine::dateKnowlege>(ui->FromCombo->currentData().toInt());
-    saveValue->toKnownDate =  static_cast<PacjentMedicine::dateKnowlege>(ui->ToCombo->currentData().toInt());
+    saveValue->dose->setValue(ui->dose->text());
+    saveValue->freguency->setValue(ui->frequency->text());
+    saveValue->fromKnownDate->setValue(static_cast<PacjentMedicine::dateKnowlege>(ui->FromCombo->currentData().toInt()));
+    saveValue->toKnownDate->setValue(static_cast<PacjentMedicine::dateKnowlege>(ui->ToCombo->currentData().toInt()));
     emit save(saveValue);
     this->close();
 }
@@ -54,6 +55,6 @@ void AddPatientForm::setRandomColor()
     auto rnd = []() -> int {return qrand() % 256;};
     QColor color = QColor(rnd(),rnd(),rnd());
     colorPicker->setColor(color);
-    saveValue->color=color;
+    saveValue->color->setValue(color);
     ui->colorPickerLayout->addWidget(colorPicker);
 }

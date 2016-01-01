@@ -30,9 +30,9 @@ void PatientModel::addMedicine(PacjentMedicine* medicine){
     tmp->setBackground(colorer->getBrush(medicine));
 
     int startDateColumn = getColumnNumber(medicine->from->getValue());
-    int endDateColumn = getColumnNumber(medicine->to);
+    int endDateColumn = getColumnNumber(medicine->to->getValue());
 
-    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine->dose,medicine->freguency));
+    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine->dose->getValue(),medicine->freguency->getValue()));
     int row = rowCount();
     setItem(row,0,new QStandardItem(QString("")));
     setItem(row,startDateColumn,tmp);

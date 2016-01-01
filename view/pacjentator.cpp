@@ -25,10 +25,10 @@ int Pacjentator::getCurrentColumn(){
 void Pacjentator::setMedicinePanelValue(QModelIndex index){
     if(QMedicineItem* item = controller->getModelItem(index)){
         ui->From->setText(item->medicine->from->getValue().toString("dd.MM.yyyy"));
-        ui->To->setText(item->medicine->to.toString("dd.MM.yyyy"));
+        ui->To->setText(item->medicine->to->getValue().toString("dd.MM.yyyy"));
         ui->Medicine->setText(item->medicine->name->getValue());
-        ui->Dose->setText(item->medicine->dose);
-        ui->Frequency->setText(item->medicine->freguency);
+        ui->Dose->setText(item->medicine->dose->getValue());
+        ui->Frequency->setText(item->medicine->freguency->getValue());
     }
 }
 

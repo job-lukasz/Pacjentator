@@ -2,7 +2,7 @@
 
 PacjentatorController::PacjentatorController(QObject *parent)
 {
-    std::list<DBRepositories*> repos = {
+    std::list<IDBRepositories*> repos = {
         PacjentMedicineRepository::getRepository()
     };
     DBConfig* config = new DBConfig(repos);

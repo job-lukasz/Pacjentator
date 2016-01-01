@@ -4,36 +4,33 @@
 #include <map>
 #include <QDebug>
 #include "dbmodel.h"
-#include "cellparameters.h"
-
+#include "dbcellparameters.h"
+#include "idbtable.h"
+#include "idbcell.h"
 
 template <typename CellType>
-class DBCell
+class DBCell:public IDBCell
 {
 private:
     CellType value;
-public:
-    CellParameters parameters;
-
 public:
     DBCell(const DBCell & copied){
         (*this)=copied;
     }
 
-    DBCell(const std::string &tableName,const std::string &columnName){
-        CellParameters newParameters = {tableName,columnName};
-        parameters=newParameters;
-        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DBModel::DatabaseMap.end()){
-            DBModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
-            qDebug()<<"Add: "<< parameters.table.c_str() << "/" << parameters.name.c_str() << "to DatabaseMap";
+    DBCell(IDBTable *table,const std::string &columnName):IDBCell(table->getName(),columnName){
+        table->addToTable(this);
+        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.column) == DBModel::DatabaseMap.end()){
+            DBModel::DatabaseMap[parameters.table+"#"+parameters.column]=parameters;
+            qDebug()<<"Add: "<< parameters.table.c_str() << "/" << parameters.column.c_str() << "to DatabaseMap";
         }
     }
 
-    DBCell(const CellParameters &cellParameters){
-        parameters=cellParameters;
-        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.name) == DBModel::DatabaseMap.end()){
-            DBModel::DatabaseMap[parameters.table+"#"+parameters.name]=parameters;
-            qDebug()<<"Add:"<< parameters.table.c_str() << "/" << parameters.name.c_str() << "to DatabaseMap";
+    DBCell(IDBTable *table,const DBCellParameters &cellParameters):IDBCell(cellParameters){
+        table->addToTable(this);
+        if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.column) == DBModel::DatabaseMap.end()){
+            DBModel::DatabaseMap[parameters.table+"#"+parameters.column]=parameters;
+            qDebug()<<"Add:"<< parameters.table.c_str() << "/" << parameters.column.c_str() << "to DatabaseMap";
         }
     }
 

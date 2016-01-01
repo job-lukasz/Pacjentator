@@ -1,9 +1,9 @@
 #ifndef PACJENTMEDICINEREPOSITORY_H
 #define PACJENTMEDICINEREPOSITORY_H
-#include "ORM/dbrepositories.h"
+#include "ORM/idbrepositories.h"
 #include "model/pacjentmedicine.h"
 
-class PacjentMedicineRepository:public DBRepositories
+class PacjentMedicineRepository:public IDBRepositories
 {
 private:
     static PacjentMedicineRepository* singleton;

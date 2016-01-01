@@ -1,29 +1,29 @@
-#include "cellparameters.h"
+#include "dbcellparameters.h"
 
-CellParameters::CellParameters(std::string table,std::string name){
-    this->name=name;
+DBCellParameters::DBCellParameters(std::string table,std::string name){
+    this->column=name;
     this->table=table;
 }
 
-CellParameters::CellParameters(){
-    this->name="";
+DBCellParameters::DBCellParameters(){
+    this->column="";
     this->table="";
 }
 
-CellParameters::CellParameters(const CellParameters &old){
+DBCellParameters::DBCellParameters(const DBCellParameters &old){
     (*this)=old;
 }
 
-void CellParameters::operator=(const CellParameters &assigned){
-    name=assigned.name;
+void DBCellParameters::operator=(const DBCellParameters &assigned){
+    column=assigned.column;
     table=assigned.table;
 }
 
-bool CellParameters::operator==(const CellParameters &parameters)
+bool DBCellParameters::operator==(const DBCellParameters &parameters)
 {
-    return parameters.name==name&&parameters.table==table;
+    return parameters.column==column&&parameters.table==table;
 }
-bool CellParameters::operator!=(const CellParameters &parameters)
+bool DBCellParameters::operator!=(const DBCellParameters &parameters)
 {
     return !((*this)==parameters);
 }

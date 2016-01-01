@@ -2,13 +2,13 @@
 #define DBCONFIG_H
 #include <string>
 #include <list>
-#include "ORM/dbrepositories.h"
+#include "ORM/idbrepositories.h"
 
 class DBConfig
 {
 public:
-    DBConfig(const std::list<DBRepositories*> &repositoryList);
-    std::list<DBRepositories*> repoList;
+    DBConfig(const std::list<IDBRepositories*> &repositoryList);
+    std::list<IDBRepositories*> repoList;
 
 };
 
