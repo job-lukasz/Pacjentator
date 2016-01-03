@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include "idbcell.h"
+#include "DatabaseController/databaseconnector.h"
 
 class IDBTable
 {
@@ -16,7 +17,7 @@ public:
     IDBTable(const IDBTable &old);
     IDBTable* getRow(const int &id);
     std::list<IDBTable*> getAllRows();
-    std::string getName();
+    std::string getTableName();
     void addToTable(IDBCell* cell);
     virtual void init() = 0;
 };

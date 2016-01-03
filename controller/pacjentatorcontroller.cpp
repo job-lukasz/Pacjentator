@@ -21,7 +21,7 @@ void PacjentatorController::openAddMedicineForm(){
 
 void PacjentatorController::addMedicine(PacjentMedicine *value){
     disconnect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(addMedicine(PacjentMedicine*)));
-    if(value->name->getValue()!=""){
+    if(value->name->getValue().getRawaValue()!=""){
         model->addMedicine(value);
         model->fillVerticalHeaders(pacjentator->getCurrentColumn());
         pacjentator->tableDecorer->spanCells(model->rowCount()-1);

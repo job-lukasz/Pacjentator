@@ -29,10 +29,10 @@ void PatientModel::addMedicine(PacjentMedicine* medicine){
     QMedicineItem* tmp = new QMedicineItem(medicine);
     tmp->setBackground(colorer->getBrush(medicine));
 
-    int startDateColumn = getColumnNumber(medicine->from->getValue());
-    int endDateColumn = getColumnNumber(medicine->to->getValue());
+    int startDateColumn = getColumnNumber(medicine->from->getValue().getRawaValue());
+    int endDateColumn = getColumnNumber(medicine->to->getValue().getRawaValue());
 
-    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine->dose->getValue(),medicine->freguency->getValue()));
+    tmp->setToolTip(QString("Dawka: %1\nCzęstotliwość: %2").arg(medicine->dose->getValue().getRawaValue(),medicine->freguency->getValue().getRawaValue()));
     int row = rowCount();
     setItem(row,0,new QStandardItem(QString("")));
     setItem(row,startDateColumn,tmp);

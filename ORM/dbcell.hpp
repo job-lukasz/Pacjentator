@@ -18,7 +18,7 @@ public:
         (*this)=copied;
     }
 
-    DBCell(IDBTable *table,const std::string &columnName):IDBCell(table->getName(),columnName){
+    DBCell(IDBTable *table,const std::string &columnName):IDBCell(table->getTableName(),columnName){
         table->addToTable(this);
         if(DBModel::DatabaseMap.find(parameters.table+"#"+parameters.column) == DBModel::DatabaseMap.end()){
             DBModel::DatabaseMap[parameters.table+"#"+parameters.column]=parameters;
@@ -54,6 +54,12 @@ public:
         this->value = value;
     }
 
+    void setValue(const std::string &value){
+//TODO implement database datatypes
+        this->value.fromString(value);
+    }
+
+    virtual ~DBCell(){}
 };
 
 #endif // DBCELL_H

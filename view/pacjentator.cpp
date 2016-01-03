@@ -24,11 +24,11 @@ int Pacjentator::getCurrentColumn(){
 
 void Pacjentator::setMedicinePanelValue(QModelIndex index){
     if(QMedicineItem* item = controller->getModelItem(index)){
-        ui->From->setText(item->medicine->from->getValue().toString("dd.MM.yyyy"));
-        ui->To->setText(item->medicine->to->getValue().toString("dd.MM.yyyy"));
-        ui->Medicine->setText(item->medicine->name->getValue());
-        ui->Dose->setText(item->medicine->dose->getValue());
-        ui->Frequency->setText(item->medicine->freguency->getValue());
+        ui->From->setText(item->medicine->from->getValue().getRawaValue().toString("dd.MM.yyyy"));
+        ui->To->setText(item->medicine->to->getValue().getRawaValue().toString("dd.MM.yyyy"));
+        ui->Medicine->setText(item->medicine->name->getValue().getRawaValue());
+        ui->Dose->setText(item->medicine->dose->getValue().getRawaValue());
+        ui->Frequency->setText(item->medicine->freguency->getValue().getRawaValue());
     }
 }
 

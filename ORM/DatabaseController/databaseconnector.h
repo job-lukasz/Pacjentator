@@ -8,6 +8,7 @@
 #include <QList>
 #include <QSqlRecord>
 #include "databaseresult.h"
+#include <map>
 
 class DatabaseConnector
 {
@@ -28,8 +29,8 @@ public:
         static DatabaseConnector singleton;
         return singleton;
     }
-    bool executeQuerry(QString query);
+    bool executeQuerry(const QString &query);
     DatabaseResult executeQueryGetResults(QString sqlQuery);
-
+    std::map<std::string,std::string> executeQueryAndGetSingleResult(std::string sqlQuery);
 };
 #endif // DATABASECONNECTOR_H

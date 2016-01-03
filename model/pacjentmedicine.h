@@ -6,21 +6,21 @@
 #include <ORM/dbcell.hpp>
 #include <ORM/idbtable.h>
 #include <string>
-
+#include "ORM/dbdatatypes.h"
 class PacjentMedicine:public IDBTable
 {
 public:
     enum dateKnowlege{wellKnown=1, dayNotKnown=2, mounthNotKnow=3, onGoing=4};
     PacjentMedicine();
     PacjentMedicine(const PacjentMedicine &old);
-    DBCell<QString>* name;
-    DBCell<QDate>* from;
-    DBCell<QDate>* to;
-    DBCell<QColor>* color;
-    DBCell<QString>* dose;
-    DBCell<QString>* freguency;
-    DBCell<dateKnowlege>* fromKnownDate;
-    DBCell<dateKnowlege>* toKnownDate;
+    DBCell<QDBString>* name;
+    DBCell<QDBDate>* from;
+    DBCell<QDBDate>* to;
+    DBCell<QDBColor>* color;
+    DBCell<QDBString>* dose;
+    DBCell<QDBString>* freguency;
+    DBCell<QDBEnum<dateKnowlege>>* fromKnownDate;
+    DBCell<QDBEnum<dateKnowlege>>* toKnownDate;
     virtual void init();
     virtual ~PacjentMedicine();
 };

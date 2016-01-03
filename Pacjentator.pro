@@ -63,7 +63,8 @@ HEADERS  += helpers/calendar.h \
     ORM/idbrepositories.h \
     ORM/idbtable.h \
     ORM/dbcellparameters.h \
-    ORM/idbcell.h
+    ORM/idbcell.h \
+    ORM/dbdatatypes.h
 
 
 FORMS    += pacjentator.ui \
