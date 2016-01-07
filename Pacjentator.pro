@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     ORM/DatabaseController/databaseresult.cpp \
     ORM/DatabaseController/databaserow.cpp \
     ORM/idbcell.cpp \
-    ORM/idbtable.cpp
+    ORM/idbtable.cpp \
+    ORM/dbdatatypes.cpp
 
 HEADERS  += helpers/calendar.h \
     model/repositories/pacjentmedicinerepository.h \

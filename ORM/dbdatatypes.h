@@ -28,6 +28,7 @@ public:
     QDate getRawaValue(){
         return value;
     }
+    static std::string getSQLDataType();
 };
 
 class QDBColor: public QIDBCell{
@@ -49,6 +50,7 @@ public:
     QColor getRawaValue(){
         return value;
     }
+    static std::string getSQLDataType();
 };
 
 class QDBString: public QIDBCell{
@@ -70,6 +72,7 @@ public:
     QString getRawaValue(){
         return value;
     }
+    static std::string getSQLDataType();
 };
 
 template<typename CellEnum>
@@ -92,7 +95,13 @@ public:
     CellEnum getRawaValue(){
         return value;
     }
+    static std::string getSQLDataType();
 };
+
+template<typename CellType>
+std::string QDBEnum<CellType>::getSQLDataType(){
+    return "INTEGER";
+}
 
 #endif // DBDATATYPES_H
 

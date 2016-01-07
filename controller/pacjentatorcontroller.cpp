@@ -1,5 +1,5 @@
 #include "pacjentatorcontroller.h"
-
+#include "ORM/idbtable.h"
 PacjentatorController::PacjentatorController(QObject *parent)
 {
     std::list<IDBRepositories*> repos = {
@@ -8,6 +8,7 @@ PacjentatorController::PacjentatorController(QObject *parent)
     DBConfig* config = new DBConfig(repos);
     DBModel* dbModel = new DBModel(config);
     dbModel->init();
+    IDBTable::getAllRows("PacjentMedicine");
     model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
     pacjentator = new Pacjentator(model,this);
 }
@@ -26,6 +27,7 @@ void PacjentatorController::addMedicine(PacjentMedicine *value){
         model->fillVerticalHeaders(pacjentator->getCurrentColumn());
         pacjentator->tableDecorer->spanCells(model->rowCount()-1);
     }
+    value->save();
 }
 
 void PacjentatorController::showMainForm(){

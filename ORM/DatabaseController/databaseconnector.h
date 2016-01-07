@@ -13,7 +13,6 @@
 class DatabaseConnector
 {
 private:
-    static bool isConnected;
     static QSqlDatabase db;
 
 private:
@@ -29,8 +28,11 @@ public:
         static DatabaseConnector singleton;
         return singleton;
     }
-    bool executeQuerry(const QString &query);
-    DatabaseResult executeQueryGetResults(QString sqlQuery);
-    std::map<std::string,std::string> executeQueryAndGetSingleResult(std::string sqlQuery);
+
+    static bool executeQuerry(const std::string &query);
+    static int executeInsertQuerry(const std::string &insertQuerry);
+    static std::map<std::string,std::string> executeQueryAndGetSingleResult(std::string sqlQuery);
+    static std::list<std::map<std::string, std::string>> executeQueryGetResults(std::string sqlQuery);
+
 };
 #endif // DATABASECONNECTOR_H

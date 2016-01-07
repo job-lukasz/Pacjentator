@@ -12,7 +12,7 @@ PacjentMedicineRepository* PacjentMedicineRepository::getRepository()
 
 void PacjentMedicineRepository::initTableFields()
 {
-    qDebug()<<"Initialize all repositories";
+    qDebug()<<"Initialize pacjentMedicine repositories";
     currentValue.init();
 }
 

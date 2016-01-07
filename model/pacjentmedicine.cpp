@@ -24,7 +24,6 @@ PacjentMedicine::PacjentMedicine(const PacjentMedicine &old):IDBTable(old)
     dose=old.dose;
 }
 
-void PacjentMedicine::init(){}
 
 PacjentMedicine::~PacjentMedicine()
 {

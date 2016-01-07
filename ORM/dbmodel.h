@@ -4,7 +4,7 @@
 #include <map>
 #include <list>
 #include <QDebug>
-#include "dbcellparameters.h"
+#include "idbcell.h"
 #include "idbrepositories.h"
 #include "dbconfig.h"
 
@@ -12,7 +12,7 @@ class DBModel{
 public:
     DBModel(DBConfig* config);
     DBConfig* config;
-    static std::map<std::string,DBCellParameters> DatabaseMap;
+    static std::map<std::string,std::map<std::string,DBCellParameters>> DatabaseMap;
     void init();
 
     virtual ~DBModel();

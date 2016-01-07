@@ -1,13 +1,15 @@
 #include "dbcellparameters.h"
 
-DBCellParameters::DBCellParameters(std::string table,std::string name){
+DBCellParameters::DBCellParameters(const std::string &table, const std::string &name, const std::string &dbDataType){
     this->column=name;
     this->table=table;
+    this->dbDataType=dbDataType;
 }
 
 DBCellParameters::DBCellParameters(){
     this->column="";
     this->table="";
+    this->dbDataType="";
 }
 
 DBCellParameters::DBCellParameters(const DBCellParameters &old){
@@ -17,6 +19,7 @@ DBCellParameters::DBCellParameters(const DBCellParameters &old){
 void DBCellParameters::operator=(const DBCellParameters &assigned){
     column=assigned.column;
     table=assigned.table;
+    dbDataType=assigned.dbDataType;
 }
 
 bool DBCellParameters::operator==(const DBCellParameters &parameters)

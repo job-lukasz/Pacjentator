@@ -21,7 +21,6 @@ public:
     DBCell<QDBString>* freguency;
     DBCell<QDBEnum<dateKnowlege>>* fromKnownDate;
     DBCell<QDBEnum<dateKnowlege>>* toKnownDate;
-    virtual void init();
     virtual ~PacjentMedicine();
 };
 
