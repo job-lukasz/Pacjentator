@@ -23,35 +23,46 @@ void IDBTable::addToTable(IDBCell *cell)
     cells[cell->parameters.column]=cell;
 }
 
+std::string IDBTable::generateInsertQuery()
+{
+    std::string query;
+    query.append("INSERT INTO ");
+    query.append(tableName).append(" (");
+    for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
+        query.append("\"").append(it->first).append("\", ");
+    }
+    query=query.substr(0,query.size()-2).append(" ) values (");
+    for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
+        query.append("\"").append(it->second->getString()).append("\", ");
+    }
+    query=query.substr(0,query.size()-2).append(" );");
+}
+
+std::string IDBTable::generateUpdateQuery()
+{
+    query.append("UPDATE ");
+    query.append(tableName).append(" SET ");
+    for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
+        query.append("\"").append(it->first).append("\"=\"").append(it->second->getString()).append("\", ");
+    }
+    query=query.substr(0,query.size()-2);
+    query.append("WHERE id = ").append(std::to_string(ID)).append(";");
+}
+
 bool IDBTable::save(){
     std::string query;
     if(ID<1){
-        query.append("INSERT INTO ");
-        query.append(tableName).append(" (");
-        for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
-            query.append("\"").append(it->first).append("\", ");
-        }
-        query=query.substr(0,query.size()-2).append(" ) values (");
-        for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
-            query.append("\"").append(it->second->getString()).append("\", ");
-        }
-        query=query.substr(0,query.size()-2).append(" );");
+        query = generateInsertQuery();
         ID = DatabaseConnector::executeInsertQuerry(query);
         if(ID>0){
             return true;
         }
     }
     else{
-        query.append("UPDATE ");
-        query.append(tableName).append(" SET ");
-        for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
-            query.append("\"").append(it->first).append("\"=\"").append(it->second->getString()).append("\", ");
-        }
-        query=query.substr(0,query.size()-2);
-        query.append("WHERE id = ").append(std::to_string(ID)).append(";");
+        query = generateUpdateQuery();
+        return DatabaseConnector::executeQuerry(query);
     }
-    qDebug()<<"executed query:"<<query.c_str();
-    return true;
+    return false;
 }
 
 void IDBTable::init()

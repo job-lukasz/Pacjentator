@@ -4,7 +4,10 @@
 QSqlDatabase DatabaseConnector::db = QSqlDatabase();
 
 DatabaseConnector::DatabaseConnector(){}
-
+//! connector.
+/*!
+  Method using to connnect to DataBase
+*/
 void DatabaseConnector::conntect(const QString &dbPath){
     qDebug()<<"Try to connect to database";
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -30,17 +33,14 @@ std::list<std::map<std::string, std::string>> DatabaseConnector::executeQueryGet
     query.exec(sqlQuery.c_str());
     QSqlRecord record = query.record();
     int columnsNumber = record.count();
-
     std::list<std::map<std::string, std::string>> result;
-    //TODO add read all
-    //    for(int i=0; i<columnsNumber; i++){
-    //        result.AddColumnName(record.fieldName(i));
-    //    }
-    //    while (query.next()) {
-    //        for(int i=0; i<columnsNumber; i++){
-    //            result.AddResult(query.value(i));
-    //        }
-    //    }
+    while (query.next()){
+        std::map<std::string, std::string> temp;
+        for(int i=0; i<columnsNumber; i++){
+            temp[record.fieldName(i).toStdString()]=query.value(i).toString().toStdString();
+        }
+        result.push_back(temp);
+    }
     return result;
 }
 

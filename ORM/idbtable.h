@@ -15,6 +15,9 @@ private:
     std::string tableName;
     static void init(std::string tableName);
 
+    std::string generateInsertQuery();
+    std::string generateUpdateQuery();
+
 protected:
     int ID;
 
