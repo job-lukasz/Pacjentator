@@ -45,7 +45,6 @@ void AddPatientForm::on_Save_clicked()
     saveValue->fromKnownDate->setValue(static_cast<PacjentMedicine::dateKnowlege>(ui->FromCombo->currentData().toInt()));
     saveValue->toKnownDate->setValue(static_cast<PacjentMedicine::dateKnowlege>(ui->ToCombo->currentData().toInt()));
     emit save(saveValue);
-    this->close();
 }
 
 

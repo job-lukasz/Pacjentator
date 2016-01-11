@@ -1,13 +1,10 @@
 #include "pacjentmedicinerepository.h"
 #include <QDebug>
-PacjentMedicineRepository* PacjentMedicineRepository::singleton=0;
 
 PacjentMedicineRepository* PacjentMedicineRepository::getRepository()
 {
-    if(!singleton){
-        singleton = new PacjentMedicineRepository;
-    }
-    return singleton;
+    static PacjentMedicineRepository singleton;
+    return &singleton;
 }
 
 void PacjentMedicineRepository::initTableFields()
@@ -19,6 +16,14 @@ void PacjentMedicineRepository::initTableFields()
 PacjentMedicine PacjentMedicineRepository::getPacjentMedicine(int id){
 
 }
+
+std::list<PacjentMedicine*> PacjentMedicineRepository::getAllRows()
+{
+    return IDBTable::getAllRows<PacjentMedicine>("PacjentMedicine");
+}
+
+PacjentMedicineRepository::~PacjentMedicineRepository()
+{}
 
 
 

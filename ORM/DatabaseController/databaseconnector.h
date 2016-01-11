@@ -7,13 +7,12 @@
 #include <QMap>
 #include <QList>
 #include <QSqlRecord>
-#include "databaseresult.h"
 #include <map>
 
 class DatabaseConnector
 {
 private:
-    static QSqlDatabase db;
+    QSqlDatabase* db;
 
 private:
     DatabaseConnector();
@@ -21,18 +20,20 @@ private:
     void operator=(DatabaseConnector const&)  = delete;
 
 
-public: 
-    static void conntect(const QString &dbPath);
-    static void disconnect();
+    std::map<std::string, std::string> fillRow(const QSqlQuery &query);
+
+public:
     static DatabaseConnector& getConnector(){
         static DatabaseConnector singleton;
         return singleton;
     }
 
-    static bool executeQuerry(const std::string &query);
-    static int executeInsertQuerry(const std::string &insertQuerry);
-    static std::map<std::string,std::string> executeQueryAndGetSingleResult(std::string sqlQuery);
-    static std::list<std::map<std::string, std::string>> executeQueryGetResults(std::string sqlQuery);
-
+    void conntect(const QString &dbPath);
+    void disconnect();
+    bool executeQuerry(const std::string &query);
+    int executeInsertQuerry(const std::string &insertQuerry);
+    std::map<std::string,std::string> executeQueryAndGetSingleResult(const std::string &sqlQuery);
+    std::list<std::map<std::string, std::string>> executeQueryGetResults(const std::string &sqlQuery);
+    ~DatabaseConnector();
 };
 #endif // DATABASECONNECTOR_H

@@ -30,12 +30,14 @@ public:
     QMedicineItem* getModelItem(QModelIndex index);
     QModelIndex getModelIndex(QDate date);
     void fillVerticalHeaders(int currentColumn);
+    void addMedicine(PacjentMedicine* value);
 
 private:
     QSharedPointer<AddPatientForm> addMedicineForm;
 
 private slots:
-    void addMedicine(PacjentMedicine* value);
+    void closeAddMedicineForm(PacjentMedicine* value);
+
 };
 
 #endif // PACJENTATORCONTROLLER_H

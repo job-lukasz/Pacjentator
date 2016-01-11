@@ -9,10 +9,10 @@ Pacjentator::Pacjentator(PatientModel *model, PacjentatorController *controller,
     connect(ui->tableView, SIGNAL(clicked(QModelIndex)),this,SLOT(setMedicinePanelValue(QModelIndex)));
     this->controller = controller;
     ui->tableView->setModel(model);
+    tableDecorer = std::shared_ptr<TableDecorer>(new TableDecorer(ui->tableView));
 }
 
 void Pacjentator::setInitValues(){
-    tableDecorer = std::shared_ptr<TableDecorer>(new TableDecorer(ui->tableView));
     tableDecorer->setCellWidth();
     tableDecorer->spanAllCells();
     ui->tableView->scrollTo(controller->getModelIndex(QDate::currentDate()));

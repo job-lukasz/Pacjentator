@@ -35,11 +35,11 @@ public:
 //    }
 
     void operator=(const CellType &assigned){
-        value = assigned;
+        value.fromString(assigned.toString());
     }
 
     void operator=(const DBCell<CellType> &assigned){
-        value = assigned.value;
+        value.fromString(assigned.value.toString());
     }
 
     bool operator!=(const CellType &compared) const{

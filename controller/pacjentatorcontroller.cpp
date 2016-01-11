@@ -1,33 +1,46 @@
 #include "pacjentatorcontroller.h"
 #include "ORM/idbtable.h"
+#define DATABASE_FILE "database.sqlite"
+
 PacjentatorController::PacjentatorController(QObject *parent)
 {
+    model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
+    pacjentator = new Pacjentator(model,this);
     std::list<IDBRepositories*> repos = {
         PacjentMedicineRepository::getRepository()
     };
     DBConfig* config = new DBConfig(repos);
-    DBModel* dbModel = new DBModel(config);
-    dbModel->init();
-    IDBTable::getAllRows("PacjentMedicine");
-    model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
-    pacjentator = new Pacjentator(model,this);
+    DatabaseConnector::getConnector().conntect(DATABASE_FILE);
+    DBModel dbModel(config);
+    dbModel.init();
+    std::list<PacjentMedicine*> a = PacjentMedicineRepository::getRepository()->getAllRows();
+    for(PacjentMedicine* value: a){
+        addMedicine(value);
+    }
+
 }
 
 void PacjentatorController::openAddMedicineForm(){
     addMedicineForm = QSharedPointer<AddPatientForm>(new AddPatientForm(new PacjentMedicine));
     addMedicineForm->show();
     addMedicineForm->setWindowModality(Qt::WindowModal);
-    connect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(addMedicine(PacjentMedicine*)));
+    connect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(closeAddMedicineForm(PacjentMedicine*)));
 }
 
-void PacjentatorController::addMedicine(PacjentMedicine *value){
-    disconnect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(addMedicine(PacjentMedicine*)));
+void PacjentatorController::closeAddMedicineForm(PacjentMedicine* value)
+{
+    disconnect(addMedicineForm.data(),SIGNAL(save(PacjentMedicine*)),this, SLOT(closeAddMedicineForm(PacjentMedicine*)));
     if(value->name->getValue().getRawaValue()!=""){
-        model->addMedicine(value);
-        model->fillVerticalHeaders(pacjentator->getCurrentColumn());
-        pacjentator->tableDecorer->spanCells(model->rowCount()-1);
+        value->save();
+        addMedicine(value);
+        addMedicineForm->close();
     }
-    value->save();
+}
+
+void PacjentatorController::addMedicine(PacjentMedicine* value){
+    model->addMedicine(value);
+    model->fillVerticalHeaders(pacjentator->getCurrentColumn());
+    pacjentator->tableDecorer->spanCells(model->rowCount()-1);
 }
 
 void PacjentatorController::showMainForm(){
@@ -48,6 +61,7 @@ QModelIndex PacjentatorController::getModelIndex(QDate date){
 }
 
 PacjentatorController::~PacjentatorController(){
+    DatabaseConnector::getConnector().disconnect();
     delete model;
     delete pacjentator;
 }

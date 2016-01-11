@@ -3,32 +3,12 @@
 #include <string>
 #include <QDate>
 #include <QColor>
+#include <QDebug>
 
 class QIDBCell{
 public:
-    virtual void fromString(const std::string&)=0;
-    virtual std::string toString()=0;
-};
-
-class QDBDate: public QIDBCell{
-private:
-    QDate value;
-public:
-    QDBDate(){}
-    QDBDate(const QDate &date){
-        value = date;
-    }
-
-    void fromString(const std::string &_value){
-        value = QDate().fromString(_value.c_str());
-    }
-    std::string toString(){
-        return value.toString().toStdString();
-    }
-    QDate getRawaValue(){
-        return value;
-    }
-    static std::string getSQLDataType();
+    virtual void fromString(std::string)=0;
+    virtual std::string toString()const=0;
 };
 
 class QDBColor: public QIDBCell{
@@ -40,16 +20,55 @@ public:
         value=color;
     }
 
-    void fromString(const std::string& _value){
-        value = QColor("black");
+    void fromString(std::string _value){
+        value = QColor(_value.c_str());
     }
-    std::string toString(){
-        return "black";
+    std::string toString() const{
+        return value.name().toStdString();
     }
 
     QColor getRawaValue(){
         return value;
     }
+    void operator=(const QDBColor &assigned){
+        value=assigned.value;
+    }
+
+    ~QDBColor(){
+        //if(value) delete value;
+    }
+
+    static std::string getSQLDataType();
+};
+
+class QDBDate: public QIDBCell{
+private:
+    QDate value;
+public:
+    QDBDate(){
+        //value = new QDate();
+    }
+    QDBDate(const QDate &date){
+        //value = new QDate(date);
+        value = date;
+    }
+
+    void fromString(std::string _value){
+        value = QDate::fromString(_value.c_str(),"dd.MM.yyyy");
+    }
+    std::string toString() const{
+        return value.toString("dd.MM.yyyy").toStdString();
+    }
+    QDate getRawaValue(){
+        return value;
+    }
+    void operator=(const QDBDate &assigned){
+        value=assigned.value;
+    }
+    ~QDBDate(){
+        //if(value) delete value;
+    }
+
     static std::string getSQLDataType();
 };
 
@@ -57,20 +76,29 @@ class QDBString: public QIDBCell{
 private:
     QString value;
 public:
-    QDBString(){}
+    QDBString(){
+        //value = new QString();
+    }
     QDBString(const QString &string){
-        value=string;
+        //value = new QString(string);
+        value = string;
     }
 
-    void fromString(const std::string& _value){
-        value = QString().fromStdString(_value);
+    void fromString(std::string _value){
+        value = QString::fromStdString(_value);
     }
-    std::string toString(){
+    std::string toString() const{
         return value.toStdString();
     }
 
     QString getRawaValue(){
         return value;
+    }
+    void operator=(const QDBString &assigned){
+        value=assigned.value;
+    }
+    ~QDBString(){
+        //if(value) delete value;
     }
     static std::string getSQLDataType();
 };
@@ -80,20 +108,26 @@ class QDBEnum:public QIDBCell{
 private:
     CellEnum value;
 public:
-    QDBEnum(){}
+    QDBEnum(){
+
+    }
     QDBEnum(const CellEnum &enum_value){
         value=enum_value;
     }
 
-    void fromString(const std::string &_value){
-        value = static_cast<CellEnum>(std::stoi(_value));
+    void fromString(std::string _value){
+        value=static_cast<CellEnum>(std::stoi(_value));
     }
 
-    std::string toString(){
+    std::string toString() const{
         return std::to_string(static_cast<int>(value));
     }
     CellEnum getRawaValue(){
         return value;
+    }
+
+    void operator=(const CellEnum &assigned){
+        value=assigned.value;
     }
     static std::string getSQLDataType();
 };

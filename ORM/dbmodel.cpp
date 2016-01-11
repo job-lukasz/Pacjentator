@@ -10,7 +10,7 @@ DBModel::DBModel(DBConfig *config)
 void DBModel::init()
 {
     qDebug()<<"Database table map content:";
-    for(std::map<std::string,std::map<std::string,DBCellParameters>>::iterator it = DBModel::DatabaseMap.begin(); it != DBModel::DatabaseMap.end(); ++it) {
+    for(std::map<std::string,std::map<std::string,DBCellParameters>>::iterator it = DatabaseMap.begin(); it != DatabaseMap.end(); ++it) {
         qDebug()<<"Table:"<< it->first.c_str() << "contains: ";
         for(std::map<std::string,DBCellParameters>::iterator itCell = it->second.begin();itCell!=it->second.end();++itCell){
              qDebug()<<"       "<<itCell->first.c_str();

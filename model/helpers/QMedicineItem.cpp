@@ -5,3 +5,8 @@ QMedicineItem::QMedicineItem(PacjentMedicine* medicine):QStandardItem(medicine->
     this->medicine=medicine;
 }
 
+QMedicineItem::~QMedicineItem()
+{
+    if(medicine) delete medicine;
+}
+

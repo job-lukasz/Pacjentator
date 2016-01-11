@@ -35,32 +35,45 @@ std::string IDBTable::generateInsertQuery()
     for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
         query.append("\"").append(it->second->getString()).append("\", ");
     }
-    query=query.substr(0,query.size()-2).append(" );");
+    return query.substr(0,query.size()-2).append(" );");
 }
 
 std::string IDBTable::generateUpdateQuery()
 {
+    std::string query;
     query.append("UPDATE ");
     query.append(tableName).append(" SET ");
     for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
         query.append("\"").append(it->first).append("\"=\"").append(it->second->getString()).append("\", ");
     }
     query=query.substr(0,query.size()-2);
-    query.append("WHERE id = ").append(std::to_string(ID)).append(";");
+    return query.append("WHERE id = ").append(std::to_string(ID)).append(";");
+}
+
+std::string IDBTable::genereteSelectAllQuery(const std::string &tableName)
+{
+    std::string query = "select \"id\", ";
+    std::map<std::string, DBCellParameters> cellList = DBModel::DatabaseMap[tableName];
+    for(std::map<std::string, DBCellParameters>::iterator it = cellList.begin(); it != cellList.end(); ++it){
+        query.append("\"").append(it->first).append("\", ");
+    }
+    query=query.substr(0,query.size()-2);
+    query.append(" from ").append(tableName).append(";");
+    return query;
 }
 
 bool IDBTable::save(){
     std::string query;
     if(ID<1){
         query = generateInsertQuery();
-        ID = DatabaseConnector::executeInsertQuerry(query);
+        ID = DatabaseConnector::getConnector().executeInsertQuerry(query);
         if(ID>0){
             return true;
         }
     }
     else{
         query = generateUpdateQuery();
-        return DatabaseConnector::executeQuerry(query);
+        return DatabaseConnector::getConnector().executeQuerry(query);
     }
     return false;
 }
@@ -72,7 +85,7 @@ void IDBTable::init()
 
 IDBTable* IDBTable::getRow(const int &id){
     ID=id;
-    std::string query = "select ";
+    std::string query = "select \"id\", ";
     for(std::map<std::string,IDBCell*>::iterator it = cells.begin(); it != cells.end(); ++it){
         query.append(it->first).append(", ");
     }
@@ -82,23 +95,13 @@ IDBTable* IDBTable::getRow(const int &id){
     for(std::map<std::string,std::string>::iterator it = result.begin(); it != result.end(); ++it){
         cells.at(it->first)->setValue(it->second);
     }
-    qDebug()<<"executed query:"<<query.c_str();
     return this;
 }
 
-std::list<IDBTable*> IDBTable::getAllRows(const std::string &tableName){
-    //TODO reimplement function
-    std::string query = "select ";
-    std::map<std::string, DBCellParameters> cellList = DBModel::DatabaseMap[tableName];
-    for(std::map<std::string, DBCellParameters>::iterator it = cellList.begin(); it != cellList.end(); ++it){
-        query.append(it->first).append(", ");
-    }
-    query=query.substr(0,query.size()-2);
-    query.append(" from ").append(tableName).append(";");
+//template<typename IDBTableType>
+//std::list<IDBTableType> IDBTable::getAllRows(const std::string &tableName){
 
-    qDebug()<<"executed query:"<<query.c_str();
-    return std::list<IDBTable*>();
-}
+//}
 
 void IDBTable::init(std::string tableName){
     std::string query = "CREATE TABLE IF NOT EXISTS ";
@@ -107,7 +110,6 @@ void IDBTable::init(std::string tableName){
         query.append("\"").append(it->second.column).append("\" ").append(it->second.dbDataType).append(", ");
     }
     query=query.substr(0,query.size()-2).append(");");
-    qInfo()<<"executed query:"<<query.c_str();
     return;
 }
 

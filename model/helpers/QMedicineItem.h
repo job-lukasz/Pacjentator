@@ -8,6 +8,7 @@ class QMedicineItem : public QStandardItem
 public:
     QMedicineItem(PacjentMedicine* medicine);
     PacjentMedicine* medicine;
+    virtual ~QMedicineItem();
 };
 
 #endif // QMEDICINEITEM_H

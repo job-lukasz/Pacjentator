@@ -17,6 +17,7 @@ private:
 
     std::string generateInsertQuery();
     std::string generateUpdateQuery();
+    static std::string genereteSelectAllQuery(const std::string &tableName);
 
 protected:
     int ID;
@@ -29,9 +30,26 @@ public:
     void addToTable(IDBCell* cell);
     bool save();
     void init();
-
+    void setID(const int &id){ID=id;}
     static void initAll();
-    static std::list<IDBTable*> getAllRows(const std::string &tableName);
+
+    template<typename IDBTableType>
+    static std::list<IDBTableType*> getAllRows(const std::string &tableName){
+        std::string query = genereteSelectAllQuery(tableName);
+
+        std::list<std::map<std::string, std::string>> queryResult = DatabaseConnector::getConnector().executeQueryGetResults(query);
+        std::list<IDBTableType*> resultObjectList;
+        for(std::map<std::string, std::string> row : queryResult) {
+            IDBTableType* temp = new IDBTableType();
+            temp->setID(std::stoi(row.at("ID")));
+            row.erase("ID");
+            for(std::map<std::string,std::string>::iterator it = row.begin(); it != row.end(); ++it){
+                temp->cells.at(it->first)->setValue(it->second);
+            }
+            resultObjectList.push_back(temp);
+        }
+        return resultObjectList;
+    }
 };
 
 #endif // DBTABLE_H

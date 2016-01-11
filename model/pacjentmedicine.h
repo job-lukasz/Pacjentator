@@ -1,12 +1,11 @@
 #ifndef PACJENTMEDICINE_H
 #define PACJENTMEDICINE_H
-#include <QString>
-#include <QDate>
-#include <QColor>
-#include <ORM/dbcell.hpp>
-#include <ORM/idbtable.h>
-#include <string>
 #include "ORM/dbdatatypes.h"
+#include "ORM/dbcell.hpp"
+#include "ORM/idbtable.h"
+#include <string>
+#include <map>
+
 class PacjentMedicine:public IDBTable
 {
 public:

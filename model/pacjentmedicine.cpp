@@ -14,16 +14,23 @@ PacjentMedicine::PacjentMedicine():IDBTable(TABLENAME){
 
 PacjentMedicine::PacjentMedicine(const PacjentMedicine &old):IDBTable(old)
 {
-    name=old.name;
-    from=old.from;
-    to=old.to;
-    freguency=old.freguency;
-    fromKnownDate=old.fromKnownDate;
-    toKnownDate=old.toKnownDate;
-    color=old.color;
-    dose=old.dose;
+    name = new DBCell<QDBString>(this,"name");
+    from = new DBCell<QDBDate>(this,"from");
+    to = new DBCell<QDBDate>(this,"to");
+    color = new DBCell<QDBColor>(this,"color");
+    dose = new DBCell<QDBString>(this,"dose");
+    freguency = new DBCell<QDBString>(this,"frequency");
+    fromKnownDate = new DBCell<QDBEnum<dateKnowlege>>(this, "fromKnownDate");
+    toKnownDate = new DBCell<QDBEnum<dateKnowlege>>(this,"toKnownDate");
+    *name = old.name->getValue();
+    *from=old.from->getValue();
+    *to=old.to->getValue();
+    *freguency=old.freguency->getValue();
+    *fromKnownDate= old.fromKnownDate->getValue();
+    *toKnownDate=old.toKnownDate->getValue();
+    *color=old.color->getValue();
+    *dose=old.dose->getValue();
 }
-
 
 PacjentMedicine::~PacjentMedicine()
 {

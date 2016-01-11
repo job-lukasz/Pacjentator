@@ -32,10 +32,7 @@ SOURCES += main.cpp\
     ORM/cellparameters.cpp \
     ORM/dbconfig.cpp \
     ORM/dbmodel.cpp \
-    ORM/DatabaseController/databasecell.cpp \
     ORM/DatabaseController/databaseconnector.cpp \
-    ORM/DatabaseController/databaseresult.cpp \
-    ORM/DatabaseController/databaserow.cpp \
     ORM/idbcell.cpp \
     ORM/idbtable.cpp \
     ORM/dbdatatypes.cpp
@@ -56,10 +53,7 @@ HEADERS  += helpers/calendar.h \
     model/helpers/QMedicineItem.h \
     ORM/dbcell.hpp \
     ORM/dbconfig.h \
-    ORM/DatabaseController/databasecell.h \
     ORM/DatabaseController/databaseconnector.h \
-    ORM/DatabaseController/databaseresult.h \
-    ORM/DatabaseController/databaserow.h \
     ORM/dbmodel.h \
     ORM/idbrepositories.h \
     ORM/idbtable.h \
