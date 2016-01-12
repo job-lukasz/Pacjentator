@@ -110,6 +110,7 @@ void IDBTable::init(std::string tableName){
         query.append("\"").append(it->second.column).append("\" ").append(it->second.dbDataType).append(", ");
     }
     query=query.substr(0,query.size()-2).append(");");
+    DatabaseConnector::getConnector().executeQuerry(query);
     return;
 }
 
