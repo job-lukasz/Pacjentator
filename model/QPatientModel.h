@@ -16,7 +16,7 @@ class PatientModel : public QStandardItemModel
 {
     Q_OBJECT
 public:
-    PatientModel(QDate startDatet, QDate endDate,QObject *parent);
+    PatientModel(QDate startDate, QDate endDate,QObject *parent);
 
     ~PatientModel();
     void generateHeader();
@@ -24,12 +24,16 @@ public:
     void fillVerticalHeaders(int value);
     void addMedicine(PacjentMedicine* medicine);
 
+signals:
+    void headerChange();
+    void itemAdded(int addedElementRow);
 private:
     QDate startDate;
     QDate endDate;
     RowColorer *colorer;
 
     QVector<int *> * spanVector;
+    QVector<QMedicineItem> medicines;
     void generateValue(int *startDate, int lastSaveColumn, int *endDate, int &currentColumn, int level);
     int *setSpanTableValue(int row, int currentColumn, int columnSpan);
     int getColumnNumber(QDate date);
@@ -38,6 +42,9 @@ private:
 
     QBrush getBrush(PacjentMedicine medicine);
     QGradient getGradient(PacjentMedicine medicine);
+    void addItem(QMedicineItem* tmp);
+    bool tryChangeModelDates(QDate startDate, QDate endDate);
+    void recalculateMedicines();
 };
 
 #endif // PATIENTMODEL_H

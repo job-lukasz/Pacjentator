@@ -21,6 +21,7 @@ class PacjentatorController: public QObject
 private:
     PatientModel* model;
     Pacjentator* pacjentator;
+    QObject* parent;
 
 public:
     PacjentatorController(QObject *parent=0);

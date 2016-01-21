@@ -19,7 +19,7 @@ public:
     }
 
     DBCell(IDBTable *table,const std::string &columnName):IDBCell(table->getTableName(),columnName,CellType::getSQLDataType()){
-        table->addToTable(this);
+        table->addCellToTable(this);
         if(DBModel::DatabaseMap.find(parameters.table) == DBModel::DatabaseMap.end() || DBModel::DatabaseMap[parameters.table].find(parameters.column) == DBModel::DatabaseMap[parameters.table].end()){
                 DBModel::DatabaseMap[parameters.table][parameters.column]=parameters;
                 qDebug()<<"To: "<< parameters.table.c_str() << "add column:" << parameters.column.c_str();

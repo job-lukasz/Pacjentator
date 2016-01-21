@@ -26,7 +26,7 @@ public:
     ~Pacjentator();
     int getCurrentColumn();
     void setInitValues();
-    std::shared_ptr<TableDecorer> tableDecorer;
+    TableDecorer* tableDecorer;
 
 public slots:
     void setVericalHeader(int value);

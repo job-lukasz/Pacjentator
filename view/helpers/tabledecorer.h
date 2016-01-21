@@ -7,9 +7,11 @@
 #include <QScrollBar>
 #include <QHeaderView>
 
-class TableDecorer
+class TableDecorer : public QObject
 {
+
 private:
+    Q_OBJECT
     QTableView* table;
     PatientModel* model;
     int cellWidth = 15;
@@ -18,8 +20,9 @@ private:
 
 public:
     TableDecorer(QTableView* tableView):table(tableView){
-         model = dynamic_cast<PatientModel*>(tableView->model());
+        model = dynamic_cast<PatientModel*>(tableView->model());
     }
+public slots:
     void spanCells(int rowNumber);
     void spanAllCells();
     void setCellWidth(int cellWidth);

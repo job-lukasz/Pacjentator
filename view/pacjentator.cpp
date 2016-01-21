@@ -5,16 +5,18 @@ Pacjentator::Pacjentator(PatientModel *model, PacjentatorController *controller,
     ui(new Ui::Pacjentator)
 {
     ui->setupUi(this);
-    connect(ui->tableView->horizontalScrollBar(), SIGNAL(valueChanged(int)),this, SLOT(setVericalHeader(int)));
-    connect(ui->tableView, SIGNAL(clicked(QModelIndex)),this,SLOT(setMedicinePanelValue(QModelIndex)));
     this->controller = controller;
     ui->tableView->setModel(model);
-    tableDecorer = std::shared_ptr<TableDecorer>(new TableDecorer(ui->tableView));
+    tableDecorer = new TableDecorer(ui->tableView);
+
+    connect(ui->tableView->horizontalScrollBar(), SIGNAL(valueChanged(int)),this, SLOT(setVericalHeader(int)));
+    connect(ui->tableView, SIGNAL(clicked(QModelIndex)),this,SLOT(setMedicinePanelValue(QModelIndex)));
+    connect(model,SIGNAL(headerChange()),tableDecorer,SLOT(spanAllCells()));
+    connect(model,SIGNAL(itemAdded(int)),tableDecorer,SLOT(spanCells(int)));
 }
 
 void Pacjentator::setInitValues(){
     tableDecorer->setCellWidth();
-    tableDecorer->spanAllCells();
     ui->tableView->scrollTo(controller->getModelIndex(QDate::currentDate()));
 }
 
@@ -53,5 +55,6 @@ void Pacjentator::on_actionDodaj_Lek_triggered()
 
 Pacjentator::~Pacjentator()
 {
+    delete tableDecorer;
     delete ui;
 }

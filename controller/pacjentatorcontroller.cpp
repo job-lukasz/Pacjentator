@@ -4,7 +4,8 @@
 
 PacjentatorController::PacjentatorController(QObject *parent)
 {
-    model = new PatientModel(QDate(1990,1,1),QDate(2017,2,10), this);
+    this->parent = parent;
+    model = new PatientModel(QDate::currentDate(),QDate::currentDate(), this);
     pacjentator = new Pacjentator(model,this);
     std::list<IDBRepositories*> repos = {
         PacjentMedicineRepository::getRepository()
@@ -40,7 +41,6 @@ void PacjentatorController::closeAddMedicineForm(PacjentMedicine* value)
 void PacjentatorController::addMedicine(PacjentMedicine* value){
     model->addMedicine(value);
     model->fillVerticalHeaders(pacjentator->getCurrentColumn());
-    pacjentator->tableDecorer->spanCells(model->rowCount()-1);
 }
 
 void PacjentatorController::showMainForm(){
